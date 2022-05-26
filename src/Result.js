@@ -39,7 +39,7 @@ let c = array.map((user, index) => {
         <tr key={index}>
             <td>{user.name}</td>
             <td>{user.email}</td>
-            <td>{user.timeStamp}</td>
+            <td>{user.time}</td>
         </tr>
     )
     console.log(user.name, index)
