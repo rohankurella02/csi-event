@@ -8,16 +8,16 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AwesomeButton } from "react-awesome-button";
 import "react-awesome-button/dist/styles.css";
-//import AwesomeButtonStyles from "react-awesome-button/src/styles/styles.scss";
 
-function Success() {
+function Fs4() {
+
     let navigate = useNavigate();
 
     const [user] = useAuthState(auth);
     const changeScore = (async (user) => {
         await updateDoc(doc(db, 'users', user.email), {
-            roundOneStatus: "passed",
-            timeStampRoundOne: firebase.firestore.Timestamp.now().toDate().toString()
+            roundFourStatus: "passed",
+            timeStampRoundFour: firebase.firestore.Timestamp.now().toDate().toString()
         })
         return
     })
@@ -28,20 +28,21 @@ function Success() {
     }, [user]);
 
     let press = () => {
-        navigate("/round-2");
+        console.log('Google Form Link')
+        //navigate("/rd4");
     }
 
   return (
     <div className='Home' >
         <img className='sImg' src={success} alt="pass" />
         <h1 className='sH1'>Congratulations {user.displayName} !</h1>
-        <h2 className='sH2'>You have successfully passed this round</h2>
-        <p style={{textAlign: "center", color: "green"}}>Please click the button below to move to the next level</p>
+        <h2 className='sH2'>You have successfully passed all the Levels in this round</h2>
+        <p style={{textAlign: "center", color: "green"}}>Please click the button below to fill the Google Form</p>
         <div style={{alignItems: "center", display: "flex"}}>
-            <AwesomeButton style={{margin: "auto"}} type="primary" onPress={press} >Next Level</AwesomeButton>
+            <AwesomeButton style={{margin: "auto"}} type="primary" ><a href="https://forms.gle/DTEJyW2donha9dCL6">Google Form Link</a></AwesomeButton>
         </div>
     </div>
   )
 }
 
-export default Success
+export default Fs4

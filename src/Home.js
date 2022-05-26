@@ -6,11 +6,24 @@ import { Form, Button } from "react-bootstrap"
 import {BiHappyAlt} from 'react-icons/bi'
 import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+import  {auth, db}  from './firebaseConf.js'
+import {useAuthState} from 'react-firebase-hooks/auth'; 
+import { useEffect } from 'react';
+import { AwesomeButton } from "react-awesome-button";
+import "react-awesome-button/dist/styles.css";
+
 
 
 function Home() {
 
   let navigate = useNavigate()
+  const [user] = useAuthState(auth);
+  useEffect(() => {
+    
+    if (!user) {
+      navigate("/login");
+    } 
+  }, [user]);
 
   let ans = {option: ['PEACH', 'MARMALADE', 'OCTOBER', 'DAFFODILS', 'FAWN', 'SAGE', 'PICNIC']}
 
@@ -84,9 +97,9 @@ function Home() {
             <Form.Check.Label>PICNIC</Form.Check.Label>
           </Form.Check>
 
-          <Button style={{marginTop: "23px"}} variant="primary" type="submit">
-          Submit ! <BiHappyAlt />
-        </Button>
+          <div style={{alignItems: "center", display: "flex", paddingTop: "23px"}}>
+            <AwesomeButton style={{margin: "auto"}} type="primary" >Submit</AwesomeButton>
+        </div>
           
           </Form>
 

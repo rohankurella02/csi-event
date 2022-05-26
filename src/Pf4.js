@@ -9,20 +9,16 @@ import firebase from 'firebase/compat/app';
 import { useEffect } from 'react';
 import "react-awesome-button/dist/styles.css";
 
-function Fail() {
+function Pf4() {
 
     let navigate = useNavigate();
 
     const [user] = useAuthState(auth);
 
-    const back = () => {
-        navigate('/')
-    }
-
     const changeScore = (async (user) => {
         await updateDoc(doc(db, 'users', user.email), {
-            roundOneStatus: "rejected",
-            timeStampRoundOne: firebase.firestore.Timestamp.now().toDate().toString()
+            roundFourStatus: false,
+            timeStampRoundFour: firebase.firestore.Timestamp.now().toDate().toString()
         })
         return
     })
@@ -32,20 +28,20 @@ function Fail() {
         } 
     }, [user]);
 
-    let press = () => {
-        navigate("/round-2");
+    let back = () => {
+        navigate("/rd4");
     }
 
   return (
     <div style={{textAlign: "center"}} className='Home'>
         <img className='pImg' style={{width: "600px"}} src={incorrect} alt="incorrect" />
         <h1 className='sH1'>Oops !</h1>
-        <h2 className='sH2'>You have selected incorrect Options ! </h2>
+        <h2 className='sH2'>You have selected incorrect answer ! </h2>
+        <p>All the levels in this round are completed. Results will be shortly announced</p>
         <p>Better luck next time ! 😃</p>
         <AwesomeButton onPress={back}>Play Again</AwesomeButton>
-        
     </div>
   )
 }
 
-export default Fail
+export default Pf4

@@ -8,16 +8,16 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AwesomeButton } from "react-awesome-button";
 import "react-awesome-button/dist/styles.css";
-//import AwesomeButtonStyles from "react-awesome-button/src/styles/styles.scss";
 
-function Success() {
+function R3s() {
+
     let navigate = useNavigate();
 
     const [user] = useAuthState(auth);
     const changeScore = (async (user) => {
         await updateDoc(doc(db, 'users', user.email), {
-            roundOneStatus: "passed",
-            timeStampRoundOne: firebase.firestore.Timestamp.now().toDate().toString()
+            roundThreeStatus: "passed",
+            timeStampRoundThree: firebase.firestore.Timestamp.now().toDate().toString()
         })
         return
     })
@@ -28,9 +28,8 @@ function Success() {
     }, [user]);
 
     let press = () => {
-        navigate("/round-2");
+        navigate("/rd4");
     }
-
   return (
     <div className='Home' >
         <img className='sImg' src={success} alt="pass" />
@@ -44,4 +43,4 @@ function Success() {
   )
 }
 
-export default Success
+export default R3s
